@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+{% load wagtailimages_tags %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/about_page.css' %}">
+{% endblock %}
+
+{% block content %}
+<main>
+    <section id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col s12 m12">
+                    {% image page.about_image fill-300x300 as img %}
+                    <h1 class="title">{{ page.section_title }}</h1>
+                    <div class="subtitle flow-text">{{ page.subtitle }}</div>
+                    <div class="divider"></div>
+                    <p class="flow-text">
+                        <img src="{{ img.url }}" alt="{{ img.alt }}" class="left responsive-img"> 
+                        {{ page.about_section_text }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock %}

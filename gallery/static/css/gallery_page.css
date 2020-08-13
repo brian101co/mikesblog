@@ -1,0 +1,21 @@
+.img-responsive {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+#gallery .col {
+    margin-top: 1.3rem;
+}
+
+.pagination {
+    display: flex !important;
+    justify-content: center;
+}
+
+@media(min-width: 768px) {
+
+}
+@media(min-width: 1260px) {
+ 
+}

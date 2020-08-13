@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+{% load wagtailimages_tags %}
+
+{% block extra_css %}
+{% image page.banner_background_image fill-1600x800 as bg_img %}
+    <style>
+        header {
+            background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+                              url('{{ bg_img.url }}');
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 70vh;
+        }
+    </style>
+    <link rel="stylesheet" href="{% static 'css/welcome_page.css' %}">
+{% endblock %}
+
+{% block content %}
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1 class="lead-text">
+                    {{ page.lead_text|title }}
+                </h1>
+                <div class="header-btn-container">
+                    <a class="waves-effect waves-light btn cta" href="{{ page.button_one.url }}" >{{ page.button_text_one }}</a>
+                    <a class="waves-effect waves-light btn cta" href="{{ page.button_two.url }}" >{{ page.button_text_two }}</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Main Section -->
+    <main role="main">
+        <section id="blog-sample">
+            <div class="container">
+                <h1 class="title">Recent Articles</h1>
+                <div class="divider"></div>
+                {% for post in posts %}
+                {% image post.preview_image fill-600x400 as img %}
+                <article>
+                    <div class="row">
+                        <div class="col s12 m12 l6">
+                            <img src="{{ img.url }}" alt="{{ img.alt }}" class="responsive-img">
+                        </div>
+                        <div class="col s12 m12 l6">
+                            <h1>{{ post.title }}</h1>
+                            <p class="flow-text">{{ post.summary }}</p>
+                            <a class="waves-effect waves-light btn" href="{{ post.get_url }}">Read More</a>
+                        </div>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+{% endblock content %}
+

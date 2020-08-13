@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load wagtailimages_tags %}
+{% load wagtailcore_tags %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/blog_page.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col s12 xl10 offset-xl1">
+            <article id="blog-post">
+                    <h1 class="title">{{ page.post_title }} </h1>
+                    <p class="post-meta">
+                        By {{ page.author }}
+                        <span class="blog-date"> 
+                            <i class="material-icons dp48">date_range</i> 
+                            {{ page.published_date|date:"M j, Y" }}
+                        </span>
+                        <span class="blog-date"> 
+                            <i class="material-icons dp48">access_time</i>
+                            {{ page.get_read_time }}
+                        </span>
+                       
+                    </p>
+                    <div class="tags">
+                        Tags:
+                        {% for tag in page.tags.all %}
+                        <a href="{% pageurl page.get_parent %}?tag={{ tag }}">
+                            <span class="new badge" data-badge-caption="{{ tag|upper }}"></span>
+                        </a>
+                        {% endfor %}
+                    </div>
+                    <div id="content">
+                        {% for block in page.main_content %}
+                            {% include_block block %}
+                        {% endfor %}
+                    </div>
+                </article>
+            </div>
+            <div class="col s12 xl10 offset-xl1">
+                <aside>
+                    <h2>Similar Articles</h2>
+                    <div class="divider"></div>
+                    {% for post in similar_posts %}
+                    <div class="card horizontal">
+                        <div class="card-image">
+                            <picture>
+                                {% image post.preview_image fill-600x300 as image %}
+                                <source srcset="{{ image.url }}" media="(min-width: 1000px)">
+                                {% image post.preview_image fill-400x300 as image %}
+                                <img src="{{ image.url }}" alt="{{ image.alt }}" width="{{ image.width }}" height="{{ image.height }}">
+                            </picture>
+                        </div>
+                        <div class="card-stacked">
+                            <div class="card-content">
+                                <h5 class="card-title">{{ post }}</h5>
+                                <p>{{ post.summary }}</p>
+                              </div>
+                              <div class="card-action">
+                                <a href="#" class="text-teal">Read More</a>
+                              </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </aside>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let elems = document.querySelectorAll('.sidenav');
+        let instances = M.Sidenav.init(elems);
+        let similarPosts = document.querySelectorAll('.card'); 
+
+        document.querySelectorAll('.rich-text p').forEach(paragraph => {
+            paragraph.classList.add('flow-text');
+        });
+
+        document.querySelectorAll('.rich-text li').forEach(item => {
+            item.classList.add('flow-text');
+        });
+
+        window.addEventListener('resize', function() {
+            width = window.innerWidth;
+
+            if ( width < 800 ) {
+                similarPosts.forEach(post => {
+                    post.classList.remove('horizontal')
+                })
+            } else {
+                similarPosts.forEach(post => {
+                    if ( post.classList.contains('horizontal') ) {
+                        return
+                    } else {
+                        post.classList.add('horizontal');
+                    }
+                })
+            }
+        });
+    });
+</script>
+{% endblock %}
