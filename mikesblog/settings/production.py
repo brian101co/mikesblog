@@ -1,10 +1,20 @@
 from .base import *
 
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['*'] 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': "mhsp1948$default",
+        'USER': "mhsp1948",
+        'PASSWORD': os.getenv("DB_PASS"),
+        'HOST': "mhsp1948.mysql.pythonanywhere-services.com",
+    }
+}
 
-SECRET_KEY = os.getenv('SECRET_KEY')
+ALLOWED_HOSTS = ['www.mikehprice.com']
+
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 try:
     from .local import *
