@@ -1,0 +1,17 @@
+{% load wagtailimages_tags %}
+
+<div class="row">
+    <div class="col s12">
+        <div class="image-wrapper">
+            <picture>
+                {% image self.image fill-1000x600 as wide_photo %}
+                <source srcset="{{ wide_photo.url }}" media="(min-width: 1000px)">
+                {% image self.image fill-600x400 as image %}
+                <img src="{{ image.url }}" alt="{{ image.alt }}" class="">
+            </picture>
+            <div class="para-background">
+                <p class="flow-text">{{ self.title }}</p>
+            </div>
+        </div>
+    </div>
+</div>

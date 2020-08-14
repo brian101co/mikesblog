@@ -1,0 +1,29 @@
+{% load menu_tags %}
+{% get_menu "main-navigation" as navigation %}
+
+<footer class="page-footer grey darken-4">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12 m6">
+                <h5 class="white-text">About Mike Price Photography</h5>
+                <p class="grey-text text-lighten-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus tenetur debitis eum est placeat a, voluptatibus eos, quidem laborum harum non illum sit officia magni laudantium! Porro voluptas unde natus.</p>
+                <a href="https://www.facebook.com/Mike-Price-Photography-1247180415349783">
+                    <img src="https://img.icons8.com/color/48/000000/facebook.png"/>
+                </a>
+            </div>
+            <div class="col l4 offset-l2 s12 m3 offset-m3">
+                <h5 class="white-text">Useful Links</h5>
+                <ul>
+                {% for menu_item in navigation.menu_items.all %}
+                    <li><a href="{{ menu_item.link_page.url }}" class="grey-text text-lighten-3">{{ menu_item.link_title }}</a></li>
+                {% endfor %}
+                </ul>
+            </div>
+            </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container center-align">
+        © 2020 Mike Price Photography
+        </div>
+        </div>
+</footer>

@@ -1,0 +1,43 @@
+#about .row {
+    margin-top: 3rem;
+}
+
+#about img {
+    margin-right: 1.5rem;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+.title {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 3rem;
+}
+
+.subtitle {
+    color: rgb(109, 109, 109);
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+}
+
+@media(min-width: 768px) {
+    .lead-text {
+        font-size: 2.5rem;
+    }
+    .title {
+        margin-top: 0;
+    }
+}
+@media(min-width: 1260px) {
+    .lead-text {
+        font-size: 3.2rem;
+    }
+}

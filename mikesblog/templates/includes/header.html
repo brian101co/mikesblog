@@ -1,0 +1,23 @@
+{% load menu_tags %}
+{% get_menu "main-navigation" as navigation %}
+
+<!-- Main Navigation -->
+<nav class="grey darken-4">
+    <div class="container">
+        <div class="nav-wrapper">
+            <a href="/" class="logo">Mike Price Photography</a>
+            <a href="#" data-target="mobile-nav" class="sidenav-trigger mobile-nav-icon"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+                {% for menu_item in navigation.menu_items.all %}
+                    <li><a href="{{ menu_item.link_page.url }}">{{ menu_item.link_title }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- Mobile Navigation -->
+<ul class="sidenav" id="mobile-nav">
+    {% for menu_item in navigation.menu_items.all %}
+        <li><a href="{{ menu_item.link_page.url }}">{{ menu_item.link_title }}</a></li>
+    {% endfor %}
+</ul>
