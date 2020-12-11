@@ -19,27 +19,9 @@ from taggit.models import TagBase, ItemBase
 
 from streams import blocks
 
-class BlogTag(TagBase):
-    class Meta:
-        verbose_name = "blog tag"
-        verbose_name_plural = "blog tags"
-
-class TaggedBlog(ItemBase):
-    tag = models.ForeignKey(
-        BlogTag,
-        related_name="tagged_blogs",
-        on_delete=models.CASCADE,
-    )
-
-    content_object = ParentalKey(
-        'blog.BlogPage', 
-        on_delete=models.CASCADE, 
-        related_name='tagged_items',
-    )
-    
 class BlogListPage(Page):
     ''' Blog Listing Page Model '''
- 
+
     def get_context(self, request, *args, **kwargs):
         ''' Returns all Articles or filters the articles by tags using query parameters and returns the filtered list. '''
         context = super().get_context(request, *args, **kwargs)
@@ -51,13 +33,13 @@ class BlogListPage(Page):
             page = int(request.GET.get('page'))
         else:
             page = None
-       
+
 
         tag = request.GET.get('tag')
         if tag:
             posts = posts.filter(tags__name=tag)
             paginator = Paginator(posts, 6)
-        
+
         try:
             posts = paginator.page(page)
         except PageNotAnInteger:
@@ -72,6 +54,25 @@ class BlogListPage(Page):
         context['num_pages'] = paginator.num_pages
         context['current_page'] = page
         return context
+
+class BlogTag(TagBase):
+    class Meta:
+        verbose_name = "blog tag"
+        verbose_name_plural = "blog tags"
+
+class TaggedBlog(ItemBase):
+    tag = models.ForeignKey(
+        BlogTag,
+        related_name="tagged_blogs",
+        on_delete=models.CASCADE,
+    )
+
+    content_object = ParentalKey(
+        'blog.BlogPage',
+        on_delete=models.CASCADE,
+        related_name='tagged_items',
+    )
+
 
 class BlogPage(Page):
     post_title = models.CharField(
@@ -117,6 +118,7 @@ class BlogPage(Page):
         )),
         ("ImageAndText", blocks.ImageAndTextBlock()),
         ("Image", blocks.ImageBlock()),
+        ("Centered_Image", blocks.ImageCenteredBlock()),
     ],
     null=True,
     blank=True,)
@@ -128,7 +130,7 @@ class BlogPage(Page):
         ImageChooserPanel("preview_image"),
         FieldPanel("summary"),
         StreamFieldPanel("main_content"),
-        
+
     ]
 
     promote_panels = Page.promote_panels + [
@@ -140,7 +142,7 @@ class BlogPage(Page):
         string = str(self.main_content)
         result = readtime.of_html(string)
         return result
-    
+
     def get_context(self, request, *args, **kwargs):
         ''' Returns all Articles or filters the articles by tags using query parameters and returns the filtered list. '''
         context = super().get_context(request, *args, **kwargs)
@@ -149,3 +151,4 @@ class BlogPage(Page):
         similar_posts = similar_posts.annotate(same_tags=Count('tags')).order_by('-same_tags', '-published_date')[:3]
         context["similar_posts"] = similar_posts
         return context
+

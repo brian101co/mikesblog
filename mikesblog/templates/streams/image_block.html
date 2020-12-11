@@ -2,9 +2,8 @@
 <div class="row">
     <div class="col s12">
         <picture>
-            {% image self.image fill-1000x600 as wide_photo %}
-            <source srcset="{{ wide_photo.url }}" media="(min-width: 1000px)">
-            {% image self.image fill-600x400 as image %}
+
+            {% image self.image original as image %}
             <img src="{{ image.url }}" alt="{{ image.alt }}" class="full">
         </picture>
     </div>

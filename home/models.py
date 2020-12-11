@@ -8,7 +8,7 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 class HomePage(Page):
     lead_text = models.CharField(
         max_length=150,
-        blank=True, 
+        blank=True,
         help_text='Subheading text under the banner title'
     )
 
@@ -64,5 +64,5 @@ class HomePage(Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        context['posts'] = BlogPage.objects.live().public().order_by('-published_date')[:3]
+        context['posts'] = BlogPage.objects.live().public().order_by('published_date')
         return context

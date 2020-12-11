@@ -3,7 +3,7 @@
 {% load wagtailimages_tags %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/about_page.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/about_page.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -17,7 +17,7 @@
                     <div class="subtitle flow-text">{{ page.subtitle }}</div>
                     <div class="divider"></div>
                     <p class="flow-text">
-                        <img src="{{ img.url }}" alt="{{ img.alt }}" class="left responsive-img"> 
+                        <img src="{{ img.url }}" alt="{{ img.alt }}" class="left responsive-img">
                         {{ page.about_section_text }}
                     </p>
                 </div>

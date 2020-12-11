@@ -1,0 +1,9 @@
+{% load wagtailimages_tags %}
+<div class="row">
+    <div class="col s12 centered">
+        <picture>
+            {% image self.image max-1000x500 as image %}
+            <img src="{{ image.url }}" alt="{{ image.alt }}" class="full">
+        </picture>
+    </div>
+</div>

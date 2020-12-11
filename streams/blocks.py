@@ -22,6 +22,16 @@ class ImageBlock(blocks.StructBlock):
         icon = "image"
         label = "Image"
 
+class ImageCenteredBlock(blocks.StructBlock):
+    image = ImageChooserBlock(
+        help_text="A centered image.",
+    )
+
+    class Meta:
+        template="streams/image_centered_block.html"
+        icon = "image"
+        label = "Centered Image"
+
 class RichtextBlock(blocks.RichTextBlock):
     class Meta:
         template = "streams/richtext_block.html"

@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 
+{% load wagtailimages_tags %}
 {% load static mathfilters %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/gallery_page.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/simpleLightbox.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/gallery_page.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -11,27 +13,39 @@
         <div class="container">
             <h1 class="center-align">Gallery</h1>
             <div class="divider"></div>
-            <div class="row">
-                {% for image in gallery_images %}
-                <div class="col s12 m6 l6 xl4">
-                    <img class="img-responsive z-depth-1 materialboxed" src="{{ image.image.url }}">
+                <div class="row">
+                     <div class="col s12 masonry">
+                    {% for image in gallery_images %}
+                    {% image image.image original as img %}
+                        <a class="item" href="{{ img.url }}">
+                            <img class="img-responsive z-depth-1 materialboxed" src="{{ img.url }}" alt="img.alt">
+                        </a>
+                    {% endfor %}
+                    </div>
                 </div>
-                {% endfor %}
-            </div>
         </div>
         <div class="container">
             <div class="row">
                 <div class="col s12 m6 offset-m3">
-                    <ul class="pagination"> 
+                    <ul class="pagination">
                       <li class="{% if current_page == 1 %} disabled {% else %} waves-effect {% endif %}"><a href="?page={{ current_page|sub:1 }}"><i class="material-icons">chevron_left</i></a></li>
                       {% for i in page_range %}
                       <li class="{% if i == current_page %} active teal {% endif %} waves-effect"><a href="?page={{ i }}">{{ i }}</a></li>
                       {% endfor %}
                       <li class="{% if current_page == num_pages %} disabled {% else %} waves-effect {% endif %}"><a href="?page={{ current_page|add:1 }}"><i class="material-icons">chevron_right</i></a></li>
                     </ul>
-                    
+
                 </div>
             </div>
         </div>
     </section>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'js/simpleLightbox.min.js' %}"></script>
+    <script>
+        let lightbox = new SimpleLightbox({
+            elements: '.masonry a'
+        });
+    </script>
 {% endblock %}

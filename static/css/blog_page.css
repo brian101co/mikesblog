@@ -1,0 +1,99 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 20 version
+*/
+
+.title {
+    font-size: 3.6rem;
+}
+
+.post-meta {
+    color: rgb(70, 70, 70);
+    font-size: 1.2rem;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+}
+
+.richtext-image {
+    width: 100%;
+    height: auto;
+}
+
+.blog-date {
+    margin-top: 0.75rem;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+
+h5 {
+    margin-top: 0;
+    font-weight: bold;
+}
+
+.card {
+    margin-top: 1.5rem;
+}
+
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating) {
+    color: #009688 !important;
+}
+
+.tags {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    color: rgb(70, 70, 70);
+    font-size: 1.5rem;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    margin-bottom: 1rem;
+}
+
+.tags .badge {
+    float: none !important;
+    padding: 0.4rem;
+    font-weight: bold !important;
+}
+
+.blog-date .material-icons {
+    margin-right: 0.5rem;
+}
+
+@media(min-width: 768px) {
+    .post-meta {
+        font-size: 1.5rem;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: row;
+            -ms-flex-direction: row;
+                flex-direction: row;
+    }
+
+    .blog-date {
+        margin-left: 1.5rem;
+        margin-top: 0;
+    }
+}
+@media(min-width: 1260px) {
+    .title {
+        font-size: 4.2rem;
+    }
+}

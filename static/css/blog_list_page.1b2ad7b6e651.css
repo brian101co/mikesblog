@@ -1,0 +1,12 @@
+.divider {
+    margin-bottom: 2rem;
+}
+
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating) {
+    color: #009688 !important;
+}
+
+.pagination {
+    display: flex !important;
+    justify-content: center;
+}
